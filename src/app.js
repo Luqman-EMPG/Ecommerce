@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import NavBar from "../src/Components/NavBar";
 import Home from "./Pages/NavBarPages/Home";
 import Login from "./Pages/NavBarPages/Signin";
@@ -9,9 +10,12 @@ import Cart from "./Pages/Cart/Cart"
 import GetCategoriesbyID from "./Pages/ProductListing/getCategoriesbyID";
 import Checkout from "./Pages/Checkout/Checkout";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {auth} from "./firebase/firebase";
 
 
 export default function App(){
+    const [user, loading] = useAuthState(auth);
+    if(!user)
     return(
         <Router>
             <NavBar/>
