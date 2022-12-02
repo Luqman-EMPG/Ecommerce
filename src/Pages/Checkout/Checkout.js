@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Checkout(){
     const cart = useSelector((state) => state.cart)
     const [user, loading] = useAuthState(auth);
-     // console.log(user.uid,"DATA")
+      console.log(user?.uid,"DATA")
     const[orders,setOrders]=useState([])
     const [products, setProducts] = useState([])
     const[billingaddress,setBillingAddress]=useState("")
@@ -36,7 +36,9 @@ export default function Checkout(){
                     });
                     setProducts(array);
                 });
+            console.log(value.id)
         })
+
     }
 
     const CalculateTotal=()=>{
@@ -54,11 +56,12 @@ export default function Checkout(){
             await addDoc(collection(db, "Orders"), {
                 Customer_id: user.uid,
                 Products:cart,
-                Order_Amount: {total},
+                Order_Amount: total,
                 Billing_Address:billingaddress,
                 Shipping_Address:shippingaddress,
                 Payment_Method:paymentmethod,
-                Order_id: `${uuidv4()}`
+                Order_id: `${uuidv4()}`,
+                Order_Status:""
             });
         } catch (err) {
             console.error(err);
@@ -78,32 +81,29 @@ export default function Checkout(){
             alert(err.message);
         }
     };
-    const ref2 = firebase.firestore().collection("Orders");
-
-
-    useEffect(()=>{
-
-        async function getOrders() {
-            const markers = [];
-            await firebase.firestore().collection('Orders').get()
-                .then(querySnapshot => {
-                    querySnapshot.docs.forEach(doc => {
-                        markers.push(doc.data());
-                    });
-                });
-            console.log("markers", markers);
-                ref2
-                    .get()
-                    .then((querySnapshot) => {
-                        const items = [];
-                        querySnapshot.forEach((doc) => {
-                            items.push(doc.data());
-                        });
-                        setOrders(items);
-                    });
-        }
-        getOrders()
-    },[ref2])
+    // const ref2 = firebase.firestore().collection("Orders");
+    // useEffect(()=>{
+    //
+    //     async function getOrders() {
+    //         const markers = [];
+    //         await firebase.firestore().collection('Orders').get()
+    //             .then(querySnapshot => {
+    //                 querySnapshot.docs.forEach(doc => {
+    //                     markers.push(doc.data());
+    //                 });
+    //             });
+    //             ref2
+    //                 .get()
+    //                 .then((querySnapshot) => {
+    //                     const items = [];
+    //                     querySnapshot.forEach((doc) => {
+    //                         items.push(doc.data());
+    //                     });
+    //                     setOrders(items);
+    //                 });
+    //     }
+    //     getOrders()
+    // },[ref2])
 
     useEffect(()=>{
         CalculateTotal();
@@ -123,7 +123,7 @@ export default function Checkout(){
             Payments();
             dispatch(ResetCart());
             alert("Your order has been placed")
-            navigate('/products')
+            navigate('/myorders')
         }
 
     }

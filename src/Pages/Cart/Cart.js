@@ -48,13 +48,6 @@ export default function Cart() {
         getProductsByID(cart)
     }, [cart])
 
-    // useEffect(() => {
-    //     if (loading) return;
-    //     if (!user) navigate("/signin");
-    //     alert("Login or create a new account")
-    // }, [user, loading]);
-
-    // console.log(products, "CART PRODUCTS")
 
     return (
         <body>

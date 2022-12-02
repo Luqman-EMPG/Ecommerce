@@ -36,6 +36,7 @@ export default function NavBar(){
                         <Link className="Navlink" to="/home">Home</Link>
                         <Link className="Navlink" to="/products">Products</Link>
                         <Link className="Navlink"  to="/dashboard">Profile</Link>
+                        <Link className="Navlink"  to="/myorders">My Orders</Link>
 
                     </div>
                 </div>

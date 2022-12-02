@@ -18,10 +18,9 @@ function Dashboard() {
             alert("An error occured while fetching user data");
         }
     };
-    debugger;
     useEffect(() => {
         if (loading) return;
-        if (!user) return navigate("/signup");
+        if (!user) return navigate("/signin");
         fetchUserName();
     }, [user, loading]);
     return (
