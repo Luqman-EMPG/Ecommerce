@@ -87,6 +87,7 @@ function Register() {
 
                 <button className="register__btn" onClick={register}>
                     Register
+
                 </button>
                 <button
                     className="register__btn register__google"

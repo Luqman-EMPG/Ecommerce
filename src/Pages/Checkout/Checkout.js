@@ -49,17 +49,21 @@ export default function Checkout(){
         })
         setTotal(x)
     }
+    var date = new Date();
+    var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+    var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+    var date_time = current_date+" "+current_time;
 
     const Orders = async () => {
         try {
-           // const res= firebase.firestore().collection('Orders').doc().id
-            await addDoc(collection(db, "Orders"), {
+            const res=await addDoc(collection(db, "Orders"), {
                 Customer_id: user.uid,
-                Products:cart,
+                order_date_time: date_time,
                 Order_Amount: total,
                 Billing_Address:billingaddress,
                 Shipping_Address:shippingaddress,
                 Payment_Method:paymentmethod,
+                // newOrd_id:res.id,
                 Order_id: `${uuidv4()}`,
                 Order_Status:""
             });
@@ -81,6 +85,18 @@ export default function Checkout(){
             alert(err.message);
         }
     };
+
+    const LineItems=async () => {
+        try {
+            await addDoc(collection(db,"Line Items"),{
+                    id: `${uuidv4()}`,
+                    Products:cart,
+                });
+        }
+        catch (err){
+
+        }
+    }
     // const ref2 = firebase.firestore().collection("Orders");
     // useEffect(()=>{
     //
@@ -121,6 +137,7 @@ export default function Checkout(){
         else{
             Orders();
             Payments();
+            LineItems();
             dispatch(ResetCart());
             alert("Your order has been placed")
             navigate('/myorders')

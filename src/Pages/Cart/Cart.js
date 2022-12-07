@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import firebase, {auth} from "./../../firebase/firebase";
-import {ResetCart} from "../../redux/cart";
+import {AddToCart, ResetCart,DecreaseInCart} from "../../redux/cart";
 import "../Cart/cart.css"
 import {useNavigate} from "react-router-dom";
-import {useAuthState} from "react-firebase-hooks/auth";
 
 export default function Cart() {
     const cart = useSelector((state) => state.cart)
     const [products, setProducts] = useState([])
     const[total,setTotal]=useState(0)
-    const [user, loading, error] = useAuthState(auth);
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
@@ -39,7 +37,6 @@ export default function Cart() {
         setTotal(x)
     }
 
-    // console.log(products,"PRODUCTS")
     useEffect(()=>{
         CalculateTotal();
     },[products])
@@ -61,9 +58,9 @@ export default function Cart() {
                        <p className="subititle">{item.description}</p>
                    </div>
                        <div className="counter">
-                           <div className="btn">+</div>
+                           <div className="btn" onClick={()=> dispatch(AddToCart(item))}>+</div>
                            <div className="count">{cart[index].qty}</div>
-                           <div className="btn">-</div>
+                           <div className="btn" onClick={()=> dispatch(DecreaseInCart(item))}>-</div>
                        </div>
                        <div className="pricess">
                            <h3 className="amount">{item.price * cart[index].qty}</h3>

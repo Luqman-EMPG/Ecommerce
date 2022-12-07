@@ -4,8 +4,6 @@ import Products from "../Pages/ProductListing/GetProducts";
 import {useState} from "react";
 import "./Component.modular.scss"
 import "../Pages/ProductListing/index.modular.scss"
-import {Link} from "react-router-dom";
-
 
 export default function Sidenav(props){
 
@@ -22,10 +20,10 @@ export default function Sidenav(props){
 
             <h3>Price Range</h3>
             <label> Min </label>
-            <input type="number" style={{color: "black"}} onChange={(e)=> props.setMin(parseInt(e.target.value,10))} />
+            <input type="number" maxLength={props.min}  style={{color: "black"}} onChange={(e)=> props.setMin(parseInt(e.target.value,10))} />
             <br/>
             <label> Max</label>
-            <input type="number" style={{color: "black"}} onChange={(e)=> props.setMax(parseInt(e.target.value,10))} />
+            <input type="number" min={props.min} style={{color: "black"}} onChange={(e)=> props.setMax(parseInt(e.target.value,10))} />
 
             <button className="clearfilter" onClick={<Products/>}>Clear Filter</button>
 

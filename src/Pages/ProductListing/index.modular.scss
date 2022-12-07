@@ -67,7 +67,7 @@ body {
   display: inline-block;
   text-align: center;
     width: 300px;
-    height: 480px;
+    height: 520px;
     background-color: rgba(0,0,0,0.1);
     border: 1px solid rgba(0,0,0,0.1);
     margin: 20px;
@@ -144,4 +144,30 @@ button:hover {
 .menu_active {
   font-weight: bold;
   border-bottom: 1px solid #565656;
+}
+.conter{
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: 'Open Sans';
+  font-weight: 900;
+  color: #202020;
+  cursor: pointer;
+}
+.count{
+  font-size: 20px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: #202020;
 }

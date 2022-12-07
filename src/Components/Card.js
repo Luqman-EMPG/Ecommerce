@@ -1,7 +1,10 @@
 import React from "react";
-
+import {AddToCart} from "../redux/cart";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Card(props){
+    const dispatch = useDispatch()
+    const cart = useSelector((state) => state.cart)
 
     return(
         <div style={{textAlign: "center"}}>

@@ -8,9 +8,9 @@ import {useSelector} from "react-redux";
 export default function MyOrders() {
 
     const [myorder,setMyOrder]=useState([])
-    const[products,setProducts]=useState([])
+    // const[products,setProducts]=useState([])
     const[customer,setCustomer]=useState([])
-    const cart = useSelector((state) => state.cart)
+    // const cart = useSelector((state) => state.cart)
     const [user]=useAuthState(auth)
 
 
@@ -37,30 +37,6 @@ export default function MyOrders() {
             });
     }
 
-    // const ref2 = firebase.firestore().collection("Products");
-    // const getProductsByID = (data) => {
-    //     let array = []
-    //     data.map((value)=> {
-    //         ref2
-    //             .where("id", "in", [value.id])
-    //             .get()
-    //             .then((data) => {
-    //                 data.forEach((doc) => {
-    //                     array.push(doc.data());
-    //                 });
-    //                 setProducts(array);
-    //             });
-    //         console.log(value.id,"VALUE")
-    //     })
-    //
-    // }
-    //
-    // useEffect(()=>{
-    //     console.log(products,"Products")
-    //     getProductsByID(cart)
-    // },[cart])
-
-
     useEffect(()=>{
         console.log(myorder,"MyOrder")
             if (user?.uid){
@@ -69,8 +45,8 @@ export default function MyOrders() {
             }
 
     }, [user?.uid])
-    console.log("u",user)
-    console.log(user?.uid,"user")
+    // console.log("u",user)
+    // console.log(user?.uid,"user")
 
     const ref = firebase.firestore().collection("Orders");
 
@@ -87,14 +63,6 @@ export default function MyOrders() {
                 setMyOrder(items);
             });
     }
-    // if(myorder.length==0){
-    //     return (
-    //         <div>
-    //             <h3>There are no previous orders to show.</h3>
-    //         </div>
-    //     )
-    // }
-
     return(
         <div>
             <h1>Orders History</h1>
@@ -103,8 +71,9 @@ export default function MyOrders() {
                     <li className="myorder" key={data.Order_id}>
                         <p className="myordertext"><b>Order#:</b>{data.Order_id}</p>
                         <p className="myordertext">{customer.map((item)=>(
-                            <p><b>Customer Name:</b> {item.firstname}</p>
+                            <p key={item.uid}><b>Customer Name:</b> {item.firstname}</p>
                         ))}</p>
+                        {/*<p className="myordertext"><b>Products:</b>{data.Products[0]}</p>*/}
                         <p className="myordertext"><b>Order Amount:</b>{data.Order_Amount}</p>
                         <p className="myordertext">{customer.map((item)=>(
                             <p><b>Contact Number:</b> {item.mobilenumber}</p>

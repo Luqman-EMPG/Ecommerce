@@ -1,6 +1,6 @@
     import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../../firebase/firebase";
+import {auth, logInWithEmailAndPassword, signInWithEmailAndPassword, signInWithGoogle} from "../../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./NavBar.modular.scss"
 
@@ -37,7 +37,7 @@ export default function Login() {
                 />
                 <button
                     className="login__btn"
-                    onClick={() => signInWithEmailAndPassword(auth,email, password)}
+                    onClick={() => logInWithEmailAndPassword(email, password)}
                 >
                     Login
                 </button>

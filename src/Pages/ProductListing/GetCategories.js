@@ -4,6 +4,7 @@ import firebase from './../../firebase/firebase'
 import "./index.modular.scss"
 import { useNavigate} from "react-router-dom";
 
+
 export default function Categories(props){
     const[categories,setCategories]=useState([])
     const[loading,setLoading]=useState(false);
@@ -26,7 +27,6 @@ export default function Categories(props){
     useEffect(()=>{
         getCategories()
     })
-
     return(
         <div>
             {categories.map((category)=>(
