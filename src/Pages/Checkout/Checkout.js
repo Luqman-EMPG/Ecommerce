@@ -12,6 +12,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function Checkout(){
     const cart = useSelector((state) => state.cart)
+    const items=cart.length;
+    console.log(items,"COUNT")
+
+    // for(let i=0;i<items;i++){
+    //     console.log(cart[i])
+    // }
+
     const [user, loading] = useAuthState(auth);
       console.log(user?.uid,"DATA")
     const[orders,setOrders]=useState([])
@@ -55,8 +62,16 @@ export default function Checkout(){
     var date_time = current_date+" "+current_time;
 
     const Orders = async () => {
+        const orderId = `${uuidv4()}`
         try {
-            const res=await addDoc(collection(db, "Orders"), {
+            for(let i=0;i<items;i++){
+                await addDoc(collection(db,"Line Items"),{
+                    Order_id:orderId,
+                    line_item:cart[i],
+                })
+            }
+
+            await addDoc(collection(db, "Orders"), {
                 Customer_id: user.uid,
                 order_date_time: date_time,
                 Order_Amount: total,
@@ -64,7 +79,7 @@ export default function Checkout(){
                 Shipping_Address:shippingaddress,
                 Payment_Method:paymentmethod,
                 // newOrd_id:res.id,
-                Order_id: `${uuidv4()}`,
+                id: orderId,
                 Order_Status:""
             });
         } catch (err) {

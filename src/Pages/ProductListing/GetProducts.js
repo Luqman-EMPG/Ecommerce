@@ -1,18 +1,20 @@
 import React, { useState,useEffect } from "react";
-import firebase from "./../../firebase/firebase";
+import firebase, {auth} from "./../../firebase/firebase";
 import Card from "../../Components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import {AddToCart, DecreaseInCart} from "../../redux/cart";
 import "./index.modular.scss";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 export default function Products(props) {
     const [products, setProducts] = useState([]);
+    const[user,loadin]=useAuthState(auth)
     // const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [value, setValue] = useState(6);
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cart)
-    // console.log("CART",cart)
+    console.log("CART",cart)
 
         const ShowNext = () => {
             setValue(value + 6);
@@ -73,17 +75,19 @@ export default function Products(props) {
         return (
             <div>
                 {products.map((data,index) => (
-                    <div className="card" key={data.id}x>
+
+                    <div className="card" key={data.id}>
                         <Card
                             img={data.image}
                             title={data.title}
                             description={data.description}
                             price={data.price}
                         />
-                        <button className="card_btn" onClick={()=> dispatch(AddToCart(data))}> Add to cart</button>
+                        <button className="card_btn" onClick={()=> dispatch(AddToCart({...data, userId: user?.uid}))}> Add to cart</button>
+
                         <div className="conter">
-                            <div className="btn" onClick={()=> dispatch(AddToCart(data))}>+</div>
-                            <div className="count">{cart[index]?.qty}</div>
+                            <div className="btn" onClick={()=> dispatch(AddToCart({...data, userId: user?.uid}))}>+</div>
+                            <div className="count">{cart?.find(elem => elem.id === data.id)?.qty ?? 0}</div>
                             <div className="btn" onClick={()=> dispatch(DecreaseInCart(data))}>-</div>
                         </div>
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import firebase, {auth} from "./../../firebase/firebase";
-import {AddToCart, ResetCart,DecreaseInCart} from "../../redux/cart";
+import firebase from "./../../firebase/firebase";
+import {AddToCart, DecreaseInCart} from "../../redux/cart";
 import "../Cart/cart.css"
 
 export default function ProductCartCounter() {
@@ -40,9 +40,6 @@ export default function ProductCartCounter() {
                         <div className="btn" onClick={()=> dispatch(AddToCart(item))}>+</div>
                         <div className="count">{cart[index].qty}</div>
                         <div className="btn" onClick={()=> dispatch(DecreaseInCart(item))}>-</div>
-                    </div>
-                    <div className="pricess">
-                        <h3 className="amount">{item.price * cart[index].qty}</h3>
                     </div>
                 </div>
             ))}

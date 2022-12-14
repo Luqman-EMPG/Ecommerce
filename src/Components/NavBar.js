@@ -21,6 +21,7 @@ export default function NavBar(){
                 </div>
                 <Link className="navbutton" to="/signin"><button>Sign In</button></Link>
                 <Link className="navbutton" to="/cart"><button>Cart</button></Link>
+                <Link className="navbutton" to="/presistcart"><button>Presist Cart</button></Link>
 
             </nav>
         )
@@ -41,6 +42,7 @@ export default function NavBar(){
                     </div>
                 </div>
                 <Link className="navbutton" to="/cart"><button>Cart</button></Link>
+                <Link className="navbutton" to="/presistcart"><button>Presist Cart</button></Link>
 
             </nav>
         )
