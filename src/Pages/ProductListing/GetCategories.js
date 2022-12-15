@@ -31,13 +31,22 @@ export default function Categories(props){
         <div>
             {categories.map((category)=>(
                 <div className={indicator===category.title?"category-background":""}>
-                    <link  to={`/products/category?id=${category.id}`}
-                        onClick={()=> {
+                    <h4 onClick={()=> {
                         setIndicator(category.title)
                         props.setcategory(category)
-                        // navigate(`/products/category?id=${category.id}`)
-                    }  } >{category.title}</link>
+                        navigate(`/products/${category.id}`)
+                    }  } >{category.title}</h4>
                 </div>
+        // <div>
+        //     {categories.map((category)=>(
+        //         <div className={indicator===category.title?"category-background":""}>
+        //             <link  to={`/products/category?id=${category.id}`}
+        //                 onClick={()=> {
+        //                 setIndicator(category.title)
+        //                 props.setcategory(category)
+        //                 // navigate(`/products/category?id=${category.id}`)
+        //             }  } >{category.title}</link>
+        //         </div>
             ))}
 
         </div>

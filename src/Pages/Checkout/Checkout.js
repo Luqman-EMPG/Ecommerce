@@ -66,7 +66,8 @@ export default function Checkout(){
         try {
             for(let i=0;i<items;i++){
                 await addDoc(collection(db,"Line Items"),{
-                    Order_id:orderId,
+                    order_id:orderId,
+                    user_id:user?.uid,
                     line_item:cart[i],
                 })
             }
@@ -101,40 +102,6 @@ export default function Checkout(){
         }
     };
 
-    const LineItems=async () => {
-        try {
-            await addDoc(collection(db,"Line Items"),{
-                    id: `${uuidv4()}`,
-                    Products:cart,
-                });
-        }
-        catch (err){
-
-        }
-    }
-    // const ref2 = firebase.firestore().collection("Orders");
-    // useEffect(()=>{
-    //
-    //     async function getOrders() {
-    //         const markers = [];
-    //         await firebase.firestore().collection('Orders').get()
-    //             .then(querySnapshot => {
-    //                 querySnapshot.docs.forEach(doc => {
-    //                     markers.push(doc.data());
-    //                 });
-    //             });
-    //             ref2
-    //                 .get()
-    //                 .then((querySnapshot) => {
-    //                     const items = [];
-    //                     querySnapshot.forEach((doc) => {
-    //                         items.push(doc.data());
-    //                     });
-    //                     setOrders(items);
-    //                 });
-    //     }
-    //     getOrders()
-    // },[ref2])
 
     useEffect(()=>{
         CalculateTotal();
@@ -152,8 +119,8 @@ export default function Checkout(){
         else{
             Orders();
             Payments();
-            LineItems();
             dispatch(ResetCart());
+            localStorage.removeItem(user?.uid)
             alert("Your order has been placed")
             navigate('/myorders')
         }

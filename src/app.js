@@ -26,7 +26,8 @@ export default function App(){
                 <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/cart' element={<Cart/>}/>
                 {/*<Route path="/presistcart" element={<PresistCart/>}/>*/}
-                <Route path='/products/category' element={<GetCategoriesbyID/>}/>
+                {/*<Route path='/products/category' element={<GetCategoriesbyID/>}/>*/}
+                <Route path='/products/:id' element={<GetCategoriesbyID/>}/>
                 <Route path='/checkout' element={<Checkout/>}/>
                 <Route path='/myorders' element={<MyOrders/>}/>
             </Routes>
