@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from "react";
 import firebase from "../../firebase/firebase";
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import Card from "../../Components/Card";
 import {AddToCart} from "../../redux/cart";
 import {useDispatch} from "react-redux";
 import Categories from "./GetCategories";
 
+
 export default function GetCategoriesbyID(props){
+    const [searchParams, setSearchParams] = useSearchParams();
+    let id = searchParams.get("id")
+    console.log(id,"ID")
     const[products,setProducts]=useState([])
     const dispatch = useDispatch()
-    const {id}=useParams()
 
     const ref=firebase.firestore().collection("Products")
     const getProductsByCategory = async () => {

@@ -5,10 +5,10 @@ import {AddToCart, ResetCart,DecreaseInCart} from "../../redux/cart";
 import "../Cart/cart.css"
 import {useNavigate} from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
-import PresistCart from "../Checkout/PresistCart";
+import PresistCart from "./PresistCart";
 
 export default function Cart() {
-    const cart = useSelector((state) => state.cart)
+    let cart = useSelector((state) => state.cart)
     console.log(cart,"CART")
     const [products, setProducts] = useState([])
     const[total,setTotal]=useState(0)
@@ -16,9 +16,14 @@ export default function Cart() {
     const dispatch=useDispatch()
     const [user, loading] = useAuthState(auth);
     // const userId = user?.uid;
-
     const count =cart.length
     console.log(count,"COUNT")
+    // useEffect(()=>{
+    //     let localcart= JSON.parse(localStorage.getItem(user?.uid)) ||[];
+    //     cart=localcart;
+    //     console.log(cart,"CART 2")
+    // })
+
 
     const ref = firebase.firestore().collection("Products");
     const getProductsByID = (data) => {
@@ -76,12 +81,13 @@ export default function Cart() {
     // useEffect(()=>{
     //
     // })
-    if(count===0){
-        return(
-            <PresistCart/>
-        )
-    }
-    else{
+    // if(count===0){
+    //     return(
+    //         <PresistCart/>
+    //     )
+    // }
+    // else {
+    // }
         return (
             <body>
             <div className="CartContainer">
@@ -121,6 +127,5 @@ export default function Cart() {
             <button onClick={()=>dispatch(ResetCart())}>Clear Cart</button>
             </body>
         )
-    }
 }
 

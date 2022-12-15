@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import firebase, {auth} from "./../../firebase/firebase";
+import firebase, {auth} from "../../firebase/firebase";
 import {AddToCart, ResetCart,DecreaseInCart} from "../../redux/cart";
-import "../Cart/cart.css"
+import "./cart.css"
 import {useNavigate} from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
 

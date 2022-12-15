@@ -9,7 +9,7 @@ import Cart from "./Pages/Cart/Cart"
 import GetCategoriesbyID from "./Pages/ProductListing/getCategoriesbyID";
 import Checkout from "./Pages/Checkout/Checkout";
 import MyOrders from "./Pages/NavBarPages/MyOrders";
-import PresistCart from "./Pages/Checkout/PresistCart";
+import PresistCart from "./Pages/Cart/PresistCart";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function App(){
@@ -25,8 +25,8 @@ export default function App(){
                 <Route path='/signup' element={<Register/>}/>
                 <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='/cart' element={<Cart/>}/>
-                <Route path="/presistcart" element={<PresistCart/>}/>
-                <Route path='/products/:id' element={<GetCategoriesbyID/>}/>
+                {/*<Route path="/presistcart" element={<PresistCart/>}/>*/}
+                <Route path='/products/category' element={<GetCategoriesbyID/>}/>
                 <Route path='/checkout' element={<Checkout/>}/>
                 <Route path='/myorders' element={<MyOrders/>}/>
             </Routes>
